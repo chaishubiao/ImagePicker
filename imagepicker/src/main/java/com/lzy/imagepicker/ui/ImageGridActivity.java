@@ -129,6 +129,13 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
         mImageFolderAdapter = new ImageFolderAdapter(this, null);
         mRecyclerAdapter = new ImageRecyclerAdapter(this, null);
 
+
+        mRecyclerAdapter.setOnImageItemClickListener(this);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(3, Utils.dp2px(this, 2), false));
+        mRecyclerView.setAdapter(mRecyclerAdapter);
+
+
         onImageSelected(0, null, false);
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
@@ -238,10 +245,7 @@ public class ImageGridActivity extends ImageBaseActivity implements ImageDataSou
             mRecyclerAdapter.refreshData(imageFolders.get(0).images);
         }
 //        mImageGridAdapter.setOnImageItemClickListener(this);
-        mRecyclerAdapter.setOnImageItemClickListener(this);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(3, Utils.dp2px(this, 2), false));
-        mRecyclerView.setAdapter(mRecyclerAdapter);
+
         mImageFolderAdapter.refreshData(imageFolders);
     }
 
